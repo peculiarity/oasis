@@ -60,7 +60,7 @@ class TokensCollection extends Mongo.Collection {
                   } });
                   Session.set('balanceLoaded', true);
                   if (tokenId === 'W-GNT') {
-                    token.getBroker.call((e, broker) => {
+                    token.getBroker.call(Session.get('address'), (e, broker) => {
                       if (!e) {
                         super.upsert('W-GNT', { $set: { broker } });
                         Session.set('GNTBroker', broker);
