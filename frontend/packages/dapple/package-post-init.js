@@ -1,15 +1,15 @@
 const config = require('./config.json');
 const ENVs = {
-    "test":"kovan",
-    "main":"live",
-    "private":"default"
-}
+  'test': 'kovan',
+  'main': 'live',
+  'private': 'default',
+};
 
 Dapple.init = function init(env) {
   var predefinedEnv = ENVs[env];
 
   if (!predefinedEnv) {
-      predefinedEnv = env;
+    predefinedEnv = env;
   }
 
   Dapple.env = predefinedEnv;
@@ -47,19 +47,47 @@ const tokenSpecs = {
   MLN: { precision: 18, format: '0,0.00[0000000000000000]' },
   RHOC: { precision: 8, format: '0,0.00[000000]' },
   TIME: { precision: 8, format: '0,0.00[000000]' },
-  GUP: { precision: 3, format: '0,0.00[0]'  },
+  GUP: { precision: 3, format: '0,0.00[0]' },
   BAT: { precision: 18, format: '0,0.00[0000000000000000]' },
   NMR: { precision: 18, format: '0,0.00[0000000000000000]' },
 };
 
-const primaryTokens = ['MKR', 'W-GNT'];
-const secondaryTokens = ['DGD', 'REP', 'ICN', '1ST', 'SNGLS', 'VSL', 'PLU', 'MLN', 'RHOC', 'TIME', 'GUP', 'BAT', 'NMR'];
-
 Dapple.getQuoteTokens = () => ['W-ETH'];
 
-Dapple.getBaseTokens = () => primaryTokens.concat(secondaryTokens);
+Dapple.getBaseTokens = () => ['W-GNT', 'DGD', 'REP', 'ICN', '1ST', 'SNGLS', 'VSL', 'PLU', 'MLN', 'RHOC', 'TIME', 'GUP', 'BAT', 'NMR'];
 
-Dapple.getTokens = () => ['W-ETH', 'MKR', 'DGD', 'GNT', 'W-GNT', 'REP', 'ICN', '1ST', 'SNGLS', 'VSL', 'PLU', 'MLN', 'RHOC', 'TIME', 'GUP', 'BAT', 'NMR'];
+Dapple.getTokens = () => ['W-ETH', 'MKR', 'DGD', 'GNT', 'W-GNT', 'REP', 'ICN', '1ST', 'SNGLS', 'VSL', 'PLU', 'MLN', 'RHOC', 'TIME', 'GUP', 'BAT', 'NMR', 'SAI'];
+
+Dapple.generatePairs = () => {
+  const TradingPairs = [
+    {
+      base: 'MKR',
+      quote: 'W-ETH',
+      isVisible: true,
+    },
+    {
+      base: 'W-ETH',
+      quote: 'SAI',
+      isVisible: true,
+    },
+    {
+      base: 'MKR',
+      quote: 'SAI',
+      isVisible: true,
+    },
+  ];
+
+  Dapple.getBaseTokens().forEach((base) => {
+    Dapple.getQuoteTokens().forEach((quote) => {
+      TradingPairs.push({
+        base,
+        quote,
+        isVisible: false,
+      });
+    });
+  });
+  return TradingPairs;
+};
 
 Dapple.getTokenSpecs = (symbol) => {
   if (typeof (tokenSpecs[symbol]) !== 'undefined') {
