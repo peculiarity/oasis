@@ -63,17 +63,17 @@ Dapple.generatePairs = () => {
     {
       base: 'MKR',
       quote: 'W-ETH',
-      isVisible: true,
+      priority: 10,
     },
     {
       base: 'W-ETH',
       quote: 'SAI',
-      isVisible: true,
+      priority: 9,
     },
     {
       base: 'MKR',
       quote: 'SAI',
-      isVisible: true,
+      priority: 8,
     },
   ];
 
@@ -82,7 +82,7 @@ Dapple.generatePairs = () => {
       TradingPairs.push({
         base,
         quote,
-        isVisible: false,
+        priority: 0,
       });
     });
   });
