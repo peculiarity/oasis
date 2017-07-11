@@ -1112,6 +1112,12 @@ button.dex-btn-default {
   }
 }
 
+button.dex-btn-default {
+  min-width: 100px;
+  width: auto;
+}
+
+
 button.dex-btn-max {
   @extend button.dex-btn-default;
   padding: 5px;
@@ -1119,12 +1125,9 @@ button.dex-btn-max {
   font-size: 10px;
   border-radius: 5px;
   float: left;
+  min-width: inherit;
   width: auto;
   transform: translateY(2.5px);
-}
-
-button.dex-btn-default.buy, button.dex-btn-default.sell {
-  width: 100px;
 }
 
 button.dex-btn-default.buy, button.dex-btn-max.buy {
